@@ -71,9 +71,10 @@ public class AStar {
                             n.setGScore(tempG);
                             openSet.add(n);
                         }
-                        this.cameFrom.put(n,current);
+
                         n.setHScore(this.heuristic(n,end));
                         n.setFScore(n.getGScore()+n.getHScore());
+                        this.cameFrom.put(n,current);
 
 
                     }

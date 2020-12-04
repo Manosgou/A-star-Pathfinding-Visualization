@@ -3,12 +3,14 @@ import static com.raylib.Jaylib.*;
 
 public class Grid {
 
-    private final int rows;
-    private final int columns;
+    private final int rows,columns;
+    private final int width,height;
     Cube [][]grid;
-    public Grid(int rows,int columns){
+    public Grid(int rows,int columns,int sWidth,int sHeight){
         this.rows = rows;
         this.columns =columns;
+        this.width = sWidth/columns;
+        this.height = sHeight/rows;
         grid = new Cube[columns][rows];
 
 
@@ -17,15 +19,13 @@ public class Grid {
 
 
     public void createGrid(){
-        int size =20;
-        int gap = 4;
+        int size =25;
 
         for(int x=0; x<columns; x++){
 
             for(int y=0; y<rows; y++){
                 Cube cube =  new Cube(true,WHITE);
-                cube.x(x*(size+gap)).y(y*(size+gap)).width(size).height(size);
-                cube.setParent(null);
+                cube.x(this.width*x).y(this.height*y).width(size).height(size);
                 cube.setFScore(0);
                 cube.setHScore(0);
                 cube.setFScore(0);
@@ -57,14 +57,24 @@ public class Grid {
     public void updateNeighbours(){
         for(int i=0; i<columns; i++){
             for(int j=0; j<rows; j++){
+
                 if (j>0 && grid[i][j-1].isAccessible())
                     grid[i][j].pushNeighbours(grid[i][j-1]);
-                if (j<columns-1 && grid[i][j+1].isAccessible())
+                if (j<rows-1 && grid[i][j+1].isAccessible())
                     grid[i][j].pushNeighbours(grid[i][j+1]);
                 if (i>0 && grid[i-1][j].isAccessible())
                     grid[i][j].pushNeighbours(grid[i-1][j]);
                 if (i<columns - 1 && grid[i+1][j].isAccessible())
                     grid[i][j].pushNeighbours(grid[i+1][j]);
+
+                if(i>0 && j>0 && grid[i-1][j-1].isAccessible())
+                    grid[i][j].pushNeighbours(grid[i-1][j-1]);
+                if(i<columns-1 && j>0 && grid[i+1][j-1].isAccessible())
+                    grid[i][j].pushNeighbours(grid[i+1][j-1]);
+                if(i>0 && j<rows-1 && grid[i-1][j+1].isAccessible())
+                    grid[i][j].pushNeighbours(grid[i-1][j+1]);
+                if(i<columns-1 && j<rows-1 && grid[i+1][j+1].isAccessible())
+                    grid[i][j].pushNeighbours(grid[i+1][j+1]);
             }
         }
     }

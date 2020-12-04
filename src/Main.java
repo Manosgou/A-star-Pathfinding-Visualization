@@ -3,16 +3,16 @@ import static com.raylib.Jaylib.*;
 
 public class Main {
     public static void main(String[] args) {
-        final int screenWidth = 800;
-        final int screenHeight = 450;
+        final int screenWidth = 600;
+        final int screenHeight = 600;
 
         InitWindow(screenWidth, screenHeight, "A* Pathfinding");
         SetTargetFPS(60);
 
         final int ROWS =20;
-        final int COLUMNS = 20;
+        final int COLUMNS =20;
 
-        Grid grid = new Grid(ROWS, COLUMNS);
+        Grid grid = new Grid(ROWS, COLUMNS,screenWidth,screenHeight);
 
         grid.createGrid();
 

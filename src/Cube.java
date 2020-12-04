@@ -8,7 +8,6 @@ public class Cube extends  Rectangle {
     private Color color;
     private ArrayList<Cube> neighbours;
     private double gScore,fScore,hScore;
-    private Cube parent;
 
     public Cube(boolean access,Color color){
         this.access=access;
@@ -61,12 +60,5 @@ public class Cube extends  Rectangle {
     }
     public double getFScore(){
         return this.fScore;
-    }
-
-    public Cube getParent() {
-        return parent;
-    }
-    public void setParent(Cube parent){
-        this.parent =parent;
     }
 }
