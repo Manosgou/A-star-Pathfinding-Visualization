@@ -35,7 +35,8 @@ public class AStar {
 
     public boolean solveAStar(Cube start,Cube end){
             this.openSet.add(start);
-
+            start.setHScore(this.heuristic(start,end));
+            start.setFScore(start.getGScore()+start.getHScore());
 
             Cube current;
             int lowestF =0;
@@ -61,12 +62,10 @@ public class AStar {
 
                 for(Cube n :current.getNeighbours()){
                     if(!closedSet.contains(n)){
-                        double  tempG = n.getGScore() +1;
+                        double  tempG = n.getGScore() +this.heuristic(current,n);
 
-                        if(openSet.contains(n)){
-                            if(tempG<n.getGScore()){
+                        if(openSet.contains(n) && tempG<n.getGScore()){
                                 n.setGScore(tempG);
-                            }
                         }else{
                             n.setGScore(tempG);
                             openSet.add(n);
