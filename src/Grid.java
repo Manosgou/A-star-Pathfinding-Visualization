@@ -19,13 +19,11 @@ public class Grid {
 
 
     public void createGrid(){
-        int size =25;
-
         for(int x=0; x<columns; x++){
 
             for(int y=0; y<rows; y++){
                 Cube cube =  new Cube(true,WHITE);
-                cube.x(this.width*x).y(this.height*y).width(size).height(size);
+                cube.x(this.width*x).y(this.height*y).width(width-1).height(height-1);
                 cube.setFScore(0);
                 cube.setHScore(0);
                 cube.setFScore(0);
