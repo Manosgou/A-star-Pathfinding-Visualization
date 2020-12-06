@@ -1,6 +1,10 @@
 import com.raylib.Raylib.*;
 
 import java.util.ArrayList;
+import java.util.WeakHashMap;
+
+import static com.raylib.Jaylib.BLACK;
+import static com.raylib.Raylib.DrawRectangleRec;
 
 
 public class Cube extends  Rectangle {
@@ -15,6 +19,8 @@ public class Cube extends  Rectangle {
         this.neighbours = new ArrayList<>();
 
     }
+
+
 
     public  boolean isAccessible(){
         return this.access;

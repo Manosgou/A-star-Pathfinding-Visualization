@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static com.raylib.Colors.*;
-
 public class AStar {
 
     Cube [][] grid;
@@ -27,13 +24,29 @@ public class AStar {
     }
 
     private void reconstructPath(Cube current){
+        this.finalPath.add(current);
             while(this.cameFrom.containsKey(current)){
                 current = this.cameFrom.get(current);
                 this.finalPath.add(current);
             }
     }
 
-    public boolean solveAStar(Cube start,Cube end){
+    public ArrayList<Cube> getOpenSet() {
+        return openSet;
+    }
+
+    public ArrayList<Cube> getClosedSet() {
+        return closedSet;
+    }
+
+    public ArrayList<Cube> getFinalPath() {
+        return finalPath;
+    }
+
+    public String getSteps(){
+        return String.valueOf(finalPath.size());
+    }
+    public boolean solveAStar(Cube start, Cube end){
             this.openSet.add(start);
             start.setHScore(this.heuristic(start,end));
             start.setFScore(start.getGScore()+start.getHScore());
@@ -51,9 +64,6 @@ public class AStar {
                 current = this.openSet.get(lowestF);
                 if(current == end){
                     this.reconstructPath(current);
-                    for(Cube cube : this.finalPath){
-                        cube.setColor(BLACK);
-                    }
                     return true;
                 }
 
@@ -63,40 +73,32 @@ public class AStar {
                 for(Cube n :current.getNeighbours()){
                     if(!closedSet.contains(n)){
                         double  tempG = n.getGScore() +this.heuristic(current,n);
-
-                        if(openSet.contains(n) && tempG<n.getGScore()){
+                        boolean betterPath = false;
+                        if(openSet.contains(n)){
+                            if(tempG<n.getGScore()){
                                 n.setGScore(tempG);
+                                betterPath =true;
+                            }
+
                         }else{
                             n.setGScore(tempG);
+                            betterPath=true;
                             openSet.add(n);
                         }
+                        
+                        if(betterPath){
+                            n.setHScore(this.heuristic(n,end));
+                            n.setFScore(n.getGScore()+n.getHScore());
+                            this.cameFrom.put(n,current);
+                        }
 
-                        n.setHScore(this.heuristic(n,end));
-                        n.setFScore(n.getGScore()+n.getHScore());
-                        this.cameFrom.put(n,current);
 
 
                     }
 
                 }
 
-
-
-
-                for(Cube cube : this.openSet){
-                    cube.setColor(PURPLE);
-                }
-
-                for(Cube cube : this.closedSet){
-                    cube.setColor(YELLOW);
-                }
-
-
-
             }
-
-
-
             return false;
         }
 

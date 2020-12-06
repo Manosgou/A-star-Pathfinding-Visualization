@@ -40,10 +40,9 @@ public class Grid {
     }
 
 
-    public void drawGrid() {
+    public void drawGrid(){
         for (int x = 0; x < columns; x++) {
             for (int y = 0; y < rows; y++) {
-
                 DrawRectangleRec(grid[x][y], grid[x][y].getColor());
             }
 

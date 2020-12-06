@@ -2,7 +2,8 @@ import com.raylib.Raylib;
 import static com.raylib.Jaylib.*;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws InterruptedException {
         final int screenWidth = 600;
         final int screenHeight = 600;
 
@@ -22,7 +23,6 @@ public class Main {
 
         AStar algorithm = new AStar(grid.getGrid());
 
-        boolean isRunning =false;
         while (!WindowShouldClose()) {
             mouse = GetMousePosition();
 
@@ -71,14 +71,28 @@ public class Main {
                     grid.updateNeighbours();
                     algorithm.solveAStar(start,end);
 
+                    for(Cube c : algorithm.getOpenSet()){
+                        c.setColor(MAGENTA);
+
+                    }
+                    for(Cube c : algorithm.getClosedSet()){
+                            c.setColor(YELLOW);
+
+                    }
+                    for(Cube c : algorithm.getFinalPath()){
+                        c.setColor(BLACK);
+
+                    }
                 }
 
             }
             if(IsKeyPressed(KEY_R)){
                 for (int i = 0; i < COLUMNS; i++) {
                     for (int j = 0; j < ROWS; j++) {
-                        grid.getGrid()[i][j].setAccess(true);
-                        grid.getGrid()[i][j].setColor(WHITE);
+                        grid.createGrid();
+                        algorithm.getOpenSet().clear();
+                        algorithm.getClosedSet().clear();
+                        algorithm.getFinalPath().clear();
                         start =null;
                         end = null;
                     }
@@ -93,6 +107,8 @@ public class Main {
 
 
             grid.drawGrid();
+            DrawText("Steps: "+algorithm.getSteps(),10,screenHeight-50,20,BLACK);
+
 
 
             EndDrawing();
