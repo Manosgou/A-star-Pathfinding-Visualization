@@ -1,1 +1,1 @@
-# A-star--Pathfinding
+# A*(star) Pathfinding Visualization 

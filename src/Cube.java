@@ -1,16 +1,11 @@
 import com.raylib.Raylib.*;
 
 import java.util.ArrayList;
-import java.util.WeakHashMap;
-
-import static com.raylib.Jaylib.BLACK;
-import static com.raylib.Raylib.DrawRectangleRec;
-
 
 public class Cube extends  Rectangle {
     private boolean access;
     private Color color;
-    private ArrayList<Cube> neighbours;
+    private final ArrayList<Cube> neighbours;
     private double gScore,fScore,hScore;
 
     public Cube(boolean access,Color color){

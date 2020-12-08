@@ -3,11 +3,9 @@ import java.util.HashMap;
 public class AStar {
 
     Cube [][] grid;
-     private ArrayList<Cube> finalPath;
+    public final ArrayList <Cube> openSet,closedSet,finalPath;
 
-    private ArrayList <Cube> openSet,closedSet;
-
-    private HashMap<Cube,Cube> cameFrom;
+    private final HashMap<Cube,Cube> cameFrom;
 
     public AStar(Cube [][]grid){
         this.grid =grid;
@@ -32,15 +30,15 @@ public class AStar {
     }
 
     public ArrayList<Cube> getOpenSet() {
-        return openSet;
+        return this.openSet;
     }
 
     public ArrayList<Cube> getClosedSet() {
-        return closedSet;
+        return this.closedSet;
     }
 
     public ArrayList<Cube> getFinalPath() {
-        return finalPath;
+        return this.finalPath;
     }
 
     public String getSteps(){
@@ -100,7 +98,7 @@ public class AStar {
 
             }
             return false;
-        }
+    }
 
 
 

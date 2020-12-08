@@ -11,9 +11,7 @@ public class Grid {
         this.columns =columns;
         this.width = sWidth/columns;
         this.height = sHeight/rows;
-        grid = new Cube[columns][rows];
-
-
+        this.grid = new Cube[columns][rows];
     }
 
 
@@ -45,10 +43,7 @@ public class Grid {
             for (int y = 0; y < rows; y++) {
                 DrawRectangleRec(grid[x][y], grid[x][y].getColor());
             }
-
-
         }
-
     }
 
     public void updateNeighbours(){
