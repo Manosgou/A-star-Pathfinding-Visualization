@@ -5,15 +5,16 @@ public class Main {
 
     public static void main(String[] args){
         final int screenWidth = 600;
-        final int screenHeight = 600;
-
-        InitWindow(screenWidth, screenHeight, "A* Pathfinding");
+        InitWindow(screenWidth, screenWidth, "A* Pathfinding");
         SetTargetFPS(60);
 
         final int ROWS = 20;
-        final int COLUMNS = 20;
+        final boolean allowDiagonal =true;
+        final int animationDelay = 50;
 
-        Grid grid = new Grid(ROWS, COLUMNS, screenWidth, screenHeight);
+
+
+        Grid grid = new Grid(ROWS,screenWidth);
 
         grid.createGrid();
 
@@ -24,11 +25,12 @@ public class Main {
         Cube end = null;
 
 
-        Thread animation;
+        Animation animation;
+        Thread animationThread = null;
         while (!WindowShouldClose()) {
             mouse = GetMousePosition();
 
-            for (int i = 0; i < COLUMNS; i++) {
+            for (int i = 0; i < ROWS; i++) {
                 for (int j = 0; j < ROWS; j++) {
                     if (CheckCollisionPointRec(mouse, grid.getGrid()[i][j])) {
                         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
@@ -69,22 +71,19 @@ public class Main {
                 if (start == null || end == null) {
                     System.out.println("ERROR:You need to add a Start point and an Endpoint in order for the algorithm to start.");
                 } else {
-                    grid.updateNeighbours();
+                    grid.updateNeighbours(allowDiagonal);
                     if(algorithm.solveAStar(start, end)){
                         System.out.println("INFO:Path was found.Total steps: "+algorithm.getSteps());
                     }else
                     {
                         System.out.println("INFO:Path not found");
                     }
-
-                    animation = new Thread(new Animation(algorithm.getClosedSet(), algorithm.getFinalPath(),70));
-
-
-                    animation.start();
-            }
+                    animation= new Animation(algorithm.getClosedSet(), algorithm.getFinalPath(),animationDelay,start,end);
+                    animationThread = new Thread(animation);
+                    animationThread.start();
+                }
 
         }
-
 
         if (IsKeyPressed(KEY_R)) {
             grid.createGrid();
@@ -99,7 +98,7 @@ public class Main {
         BeginDrawing();
         ClearBackground(BLACK);
         grid.drawGrid();
-        DrawText("Steps: " + algorithm.getSteps(), 10, screenHeight - 50, 20, BLACK);
+        DrawText("Steps: " + algorithm.getSteps(), 10, screenWidth - 50, 20, BLACK);
         EndDrawing();
 
     }

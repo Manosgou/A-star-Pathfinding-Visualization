@@ -60,7 +60,7 @@ public class AStar {
 
                 }
                 current = this.openSet.get(lowestF);
-                if(current == end){
+                if(current.equals(end)){
                     this.reconstructPath(current);
                     return true;
                 }

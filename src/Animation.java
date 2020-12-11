@@ -1,23 +1,24 @@
 import java.util.ArrayList;
-import static com.raylib.Jaylib.BLACK;
-import static com.raylib.Jaylib.MAGENTA;
+import static com.raylib.Jaylib.*;
 
-public class Animation implements Runnable {
-    private final ArrayList<Cube> closedSet,finalPath;
+public class Animation extends Thread {
+    private final ArrayList<Cube> closedSet, finalPath;
     private final int delay;
-    public Animation(ArrayList closedSet,ArrayList finalPath,int delay) {
+    private Cube start,end;
+    public Animation(ArrayList closedSet, ArrayList finalPath, int delay,Cube start,Cube end ) {
         this.closedSet = closedSet;
-        this.finalPath =finalPath;
+        this.finalPath = finalPath;
         this.delay = delay;
+        this.start =start;
+        this.end=end;
     }
+
 
     @Override
     public void run() {
 
         for (Cube cube : closedSet) {
-
             cube.setColor(MAGENTA);
-
             try {
                 Thread.sleep(this.delay);
             } catch (InterruptedException e) {
@@ -38,7 +39,7 @@ public class Animation implements Runnable {
 
 
         }
+//        start.setColor(GREEN);
+//        end.setColor(RED);
     }
-
-
 }
