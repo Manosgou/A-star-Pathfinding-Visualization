@@ -35,7 +35,7 @@ final int animationDelay = 50;
 coming soon ...
 
 
-#Important note
+# Important note
 This project is not yet completed.I' sure some of you,will experience bugs and crashes.There is a lot of things to be rethinked and fixed,so feel free to report any issues.
 
 # Built with
