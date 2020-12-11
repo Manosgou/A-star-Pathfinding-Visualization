@@ -29,7 +29,7 @@ final int animationDelay = 50;
 * "S" to add the start point.
 * "E" to add the end point.
 * "R" to reset.(Do not to press the R button when the animation runs,it will lead to an exception.)
-
+* "SPACEBAR" to start the algorithm.
 
 # Screenshots & Videos
 coming soon ...
