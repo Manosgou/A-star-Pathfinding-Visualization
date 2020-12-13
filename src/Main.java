@@ -48,14 +48,14 @@ public class Main {
                                 end = null;
                             }
                         } else if (IsKeyPressed(KEY_S)) {
-                            if (start == null && grid.getGrid()[i][j] != end) {
+                            if (start == null && grid.getGrid()[i][j] != end && grid.getGrid()[i][j].isAccessible()) {
                                 grid.getGrid()[i][j].setColor(GREEN);
                                 start = grid.getGrid()[i][j];
                                 System.out.println("INFO:Start point set at x: "+i+" and y: "+j);
                             }
 
                         } else if (IsKeyPressed(KEY_E)) {
-                            if (end == null && grid.getGrid()[i][j] != start) {
+                            if (end == null && grid.getGrid()[i][j] != start && grid.getGrid()[i][j].isAccessible()) {
                                 grid.getGrid()[i][j].setColor(RED);
                                 end = grid.getGrid()[i][j];
                                 System.out.println("INFO:End point set at x:"+i+" and y: "+j);
