@@ -18,7 +18,7 @@ public class Main {
 
         grid.createGrid();
 
-        AStar algorithm = new AStar(grid.getGrid());
+        AStar algorithm = new AStar(grid.getGrid(),allowDiagonal);
 
         Raylib.Vector2 mouse;
         Cube start = null;
