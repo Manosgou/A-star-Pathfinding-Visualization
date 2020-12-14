@@ -80,29 +80,18 @@ public class AStar {
             this.openSet.remove(current);
             this.closedSet.add(current);
 
-            for (Cube n : current.getNeighbours()) {
-                if (closedSet.contains(n))
+            for (Cube neighbor : current.getNeighbours()) {
+                if (closedSet.contains(neighbor))
                     continue;
-                double tempG = n.getGScore() + this.distance(current, n);
-                boolean betterPath = false;
-                if (openSet.contains(n)) {
-                    if (tempG < n.getGScore()) {
-                        n.setGScore(tempG);
-                        betterPath = true;
-                    }
+                double tempG = neighbor.getGScore() + this.distance(current,neighbor);
+                if(!openSet.contains(neighbor))
+                    openSet.add(neighbor);
+                else if(tempG>=neighbor.getGScore())
+                    continue;
 
-                } else {
-                    n.setGScore(tempG);
-                    betterPath = true;
-                    openSet.add(n);
-                }
-
-                if (betterPath) {
-                    n.setHScore(this.heuristic(n, end));
-                    n.setFScore(n.getGScore() + n.getHScore());
-                    this.cameFrom.put(n, current);
-                }
-
+                this.cameFrom.put(neighbor, current);
+                neighbor.setHScore(this.heuristic(neighbor, end));
+                neighbor.setFScore(neighbor.getGScore() + neighbor.getHScore());
 
             }
 

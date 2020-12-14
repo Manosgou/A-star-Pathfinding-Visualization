@@ -1,5 +1,4 @@
 import com.raylib.Raylib.*;
-
 import java.util.ArrayList;
 
 public class Cube extends  Rectangle {
