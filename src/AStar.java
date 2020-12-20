@@ -89,9 +89,11 @@ public class AStar {
                 else if(tempG>=neighbor.getGScore())
                     continue;
 
-                this.cameFrom.put(neighbor, current);
+
                 neighbor.setHScore(this.heuristic(neighbor, end));
                 neighbor.setFScore(neighbor.getGScore() + neighbor.getHScore());
+                this.cameFrom.put(neighbor, current);
+
 
             }
 
