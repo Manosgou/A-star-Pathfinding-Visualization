@@ -82,7 +82,7 @@ public class Main {
                     animationThread = new Thread(animation);
                     animationThread.start();
                 }
-
+                System.out.println(animationThread.isAlive());
         }
 
         if (IsKeyPressed(KEY_R)) {
@@ -98,7 +98,7 @@ public class Main {
         BeginDrawing();
         ClearBackground(BLACK);
         grid.drawGrid();
-        DrawText("Steps: " + algorithm.getSteps(), 10, screenWidth - 50, 20, BLACK);
+        DrawText("Steps: " + algorithm.getSteps(), 5, screenWidth - 50, 20, BLACK);
         EndDrawing();
 
     }

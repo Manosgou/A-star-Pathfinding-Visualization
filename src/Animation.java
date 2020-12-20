@@ -18,14 +18,13 @@ public class Animation extends Thread {
 
     @Override
     public void run() {
-
+        closedSet.remove(start);
+        closedSet.remove(end);
+        finalPath.remove(start);
+        finalPath.remove(end);
         for (Cube cube : closedSet) {
 
             cube.setColor(MAGENTA);
-            if(cube.equals(start))
-                cube.setColor(GREEN);
-            if(cube.equals(end))
-                cube.setColor(RED);
             try {
                 Thread.sleep(this.delay);
             } catch (InterruptedException e) {
@@ -37,10 +36,6 @@ public class Animation extends Thread {
         for (Cube cube : finalPath) {
 
             cube.setColor(BLACK);
-            if(cube.equals(start))
-                cube.setColor(GREEN);
-            if(cube.equals(end))
-                cube.setColor(RED);
             try {
                 Thread.sleep(this.delay);
             } catch (InterruptedException e) {
