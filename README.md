@@ -12,24 +12,24 @@ Inside `main.java` you will find the following three variables.
 
 ```java
 //The ROWS variable holds the number of rows that the grid has.
-// By changing its value you will also affect the number of columns because rows = columns.
+// By changing its value you will also affect the number of columns because rows = columns.(DEFAULT = 20)
 final int ROWS = 20;
 
 //The allowDiagonal variable according to it's value(true or false) allows diagonal movement.
-// Default value is true.
+// Default value is true.(DEFAULT =true)
 final boolean allowDiagonal =true;
 
-//The animationDelay variable stores the delay(milliseconds) of algorithm's visual representation.
-final int animationDelay = 50;
+//The animated variable enables the animated visual representation of pathfinding.(DEFAULT =true)
+final boolean animated = true;
 ```
 
 # Controls
-* Left click to create obstacles.
-* Right click to delete obstacles.
-* "S" to add the start point.
-* "E" to add the end point.
-* "R" to reset.(Do not to press the R button when the animation runs,it will lead to an exception.)
-* "SPACEBAR" to start the algorithm.
+* **"Left click"** to create obstacles.
+* **"Right click"** to delete obstacles.
+* **"S"** to add the start point.
+* **"E"** to add the end point.
+* **"R"** to reset. ~~(Do not to press the R button when the animation runs,it will lead to an exception.)~~
+* **"SPACEBAR"** to start the algorithm.
 
 # Screenshots & Videos
 coming soon ...
@@ -40,4 +40,4 @@ This project is not yet completed.I' sure some of you,will experience bugs and c
 
 # Built with
 * Java
-* [RayLib](https://www.raylib.com/)
+* [RayLib](https://www.raylib.com/) ([Jaylib - Java binding](https://github.com/electronstudio/jaylib/))
