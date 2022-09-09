@@ -1,6 +1,10 @@
 import com.raylib.Raylib.*;
 import java.util.ArrayList;
 
+import static com.raylib.Jaylib.BLACK;
+import static com.raylib.Raylib.DrawRectangleRec;
+import static com.raylib.Raylib.DrawText;
+
 public class Cube extends  Rectangle {
     private boolean access;
     private Color color;
@@ -14,6 +18,9 @@ public class Cube extends  Rectangle {
 
     }
 
+    public void drawCube(){
+        DrawRectangleRec(this, this.color);
+    }
 
 
     public  boolean isAccessible(){

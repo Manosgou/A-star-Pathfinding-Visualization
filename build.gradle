@@ -1,0 +1,30 @@
+import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'me.manosgou'
+version '1.0-SNAPSHOT'
+mainClassName = project.properties['main'] ?: 'Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'uk.co.electronstudio.jaylib:jaylib:4.2.+'
+}
+
+application {
+    if(DefaultNativePlatform.currentOperatingSystem.isMacOsX()) {
+        applicationDefaultJvmArgs = ['-XstartOnFirstThread']
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

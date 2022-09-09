@@ -1,3 +1,6 @@
+import com.raylib.Jaylib;
+import com.raylib.Raylib;
+
 import static com.raylib.Jaylib.*;
 
 
@@ -23,11 +26,9 @@ public class Grid {
                 cube.setFScore(0);
                 cube.setHScore(0);
                 cube.setFScore(0);
-                grid[x][y] = cube;
+                this.grid[x][y] = cube;
 
             }
-
-
         }
     }
 
@@ -35,11 +36,10 @@ public class Grid {
         return this.grid;
     }
 
-
     public void drawGrid() {
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < rows; y++) {
-                DrawRectangleRec(grid[x][y], grid[x][y].getColor());
+                grid[x][y].drawCube();
             }
         }
     }
