@@ -1,6 +1,10 @@
 import com.raylib.Raylib;
+import org.apache.commons.lang3.Range;
+
+import java.util.Random;
 
 import static com.raylib.Jaylib.*;
+
 
 public class Main {
 
@@ -66,37 +70,60 @@ public class Main {
                 }
             }
             try {
-                if (IsKeyPressed(KEY_SPACE) && animationThread==null) {
-                    if (start == null || end == null) {
-                        System.out.println("ERROR:You need to add a Start point and an Endpoint in order for the algorithm to start.");
-                    } else {
-                        grid.updateNeighbours(allowDiagonal);
-                        if (algorithm.solveAStar(start, end)) {
-                            System.out.println("INFO:Path was found.Total steps: " + algorithm.getSteps());
+                if (IsKeyPressed(KEY_SPACE)) {
+                    if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
+                        if (start == null || end == null) {
+                            System.out.println("ERROR:You need to add a Start point and an Endpoint in order for the algorithm to start.");
                         } else {
-                            System.out.println("INFO:Path not found");
-                        }
-                        final Animation animation = new Animation(grid.getGrid(), algorithm.getClosedSet(), algorithm.getOpenSet(), algorithm.getFinalPath(), animated, start, end);
-                        animationThread = new Thread(() -> {
-                            animation.animate();
-                        });
-                        animationThread.start();
+                            grid.updateNeighbours(allowDiagonal);
+                            if (algorithm.solveAStar(start, end)) {
+                                System.out.println("INFO:Path was found.Total steps: " + algorithm.getSteps());
+                            } else {
+                                System.out.println("INFO:Path not found");
+                            }
+                            final Animation animation = new Animation(grid.getGrid(), algorithm.getClosedSet(), algorithm.getOpenSet(), algorithm.getFinalPath(), animated, start, end);
+                            animationThread = new Thread(() -> {
+                                animation.animate();
+                            });
+                            animationThread.start();
 
+
+                        }
+                    }
+                }
+
+                if (IsKeyPressed(KEY_R)) {
+                    if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
+                        grid.createGrid();
+                        algorithm.getOpenSet().clear();
+                        algorithm.getClosedSet().clear();
+                        algorithm.getFinalPath().clear();
+                        start = null;
+                        end = null;
+                        System.out.println("INFO:Everything was cleared.");
 
                     }
                 }
 
-                if (IsKeyPressed(KEY_R) && !animationThread.isAlive()) {
-                    grid.createGrid();
-                    algorithm.getOpenSet().clear();
-                    algorithm.getClosedSet().clear();
-                    algorithm.getFinalPath().clear();
-                    start = null;
-                    end = null;
-                    animationThread=null;
-                    System.out.println("INFO:Everything was cleared.");
+                if (IsKeyPressed(KEY_G)) {
+                    if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
+                        Random rand = new Random();
+                        Range<Integer> range = Range.between(grid.getGrid().length / 2, grid.getGrid().length);
+                        for (int i = 0; i < range.getMaximum() * grid.getGrid().length / 2; i++) {
+                            int x = rand.nextInt(grid.getGrid().length);
+                            int y = rand.nextInt(grid.getGrid().length);
+                            if (grid.getGrid()[x][y] != end && grid.getGrid()[x][y] != start) {
+                                grid.getGrid()[x][y].setColor(GRAY);
+                                grid.getGrid()[x][y].setAccess(false);
+                            }
+                        }
+                    }
+
+
                 }
-            } catch (Exception e) {
+
+
+            } catch (NullPointerException e) {
                 System.out.println(e);
             }
 
