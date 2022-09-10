@@ -29,6 +29,7 @@ final boolean animated = true;
 * **"S"** to add the start point.
 * **"E"** to add the end point.
 * **"R"** to reset. ~~(Do not to press the R button when the animation runs,it will lead to an exception.)~~
+* **"G"** to place random obstacles on the grid.
 * **"SPACEBAR"** to start the algorithm.
 
 # Screenshots & Videos
@@ -39,5 +40,5 @@ coming soon ...
 This project is not yet completed.I' sure some of you,will experience bugs and crashes.There is a lot of things to be rethinked and fixed,so feel free to report any issues.
 
 # Built with
-* Java
+* Java (version 8)
 * [RayLib](https://www.raylib.com/) ([Jaylib - Java binding](https://github.com/electronstudio/jaylib/))
