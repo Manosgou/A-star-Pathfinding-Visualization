@@ -9,6 +9,10 @@ group 'me.manosgou'
 version '1.0-SNAPSHOT'
 mainClassName = project.properties['main'] ?: 'Main'
 
+
+sourceCompatibility = '1.8'
+targetCompatibility = '17'
+
 repositories {
     mavenCentral()
 }
