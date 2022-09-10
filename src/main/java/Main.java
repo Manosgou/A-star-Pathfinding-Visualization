@@ -9,7 +9,7 @@ import static com.raylib.Jaylib.*;
 public class Main {
 
     public static void main(String[] args) {
-        final int screenWidth = 600;
+        final int screenWidth = 800;
         InitWindow(screenWidth, screenWidth, "A* Pathfinding");
         SetTargetFPS(60);
 

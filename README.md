@@ -40,5 +40,5 @@ coming soon ...
 This project is not yet completed.I' sure some of you,will experience bugs and crashes.There is a lot of things to be rethinked and fixed,so feel free to report any issues.
 
 # Built with
-* Java (version 8)
+* Java (version 17)
 * [RayLib](https://www.raylib.com/) ([Jaylib - Java binding](https://github.com/electronstudio/jaylib/))
