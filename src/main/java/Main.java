@@ -1,3 +1,4 @@
+import com.raylib.Jaylib;
 import com.raylib.Raylib;
 import org.apache.commons.lang3.Range;
 
@@ -13,7 +14,7 @@ public class Main {
         InitWindow(screenWidth, screenWidth, "A* Pathfinding");
         SetTargetFPS(60);
 
-        final int ROWS = 20;
+        final int ROWS = 50;
         final boolean allowDiagonal = true;
         final boolean animated = true;
 
@@ -25,16 +26,46 @@ public class Main {
         final AStar algorithm = new AStar(grid.getGrid(), allowDiagonal);
 
         Raylib.Vector2 mouse;
+        Raylib.Vector2 mousePosition;
+
+        Camera2D camera2D = new Camera2D();
+        camera2D.target(new Jaylib.Vector2((screenWidth + (grid.getGrid().length * grid.getGrid()[0][0].x() * ROWS)) / 2, (screenWidth + (grid.getGrid().length * grid.getGrid()[0][0].y() * ROWS)) / 2));
+        camera2D.offset(new Jaylib.Vector2(screenWidth / 2.0f, screenWidth / 2.0f));
+        camera2D.zoom(1.0f);
+
+
         Cube start = null;
         Cube end = null;
 
         Thread animationThread = null;
+
+        boolean freeMove = false;
+
         while (!WindowShouldClose()) {
             mouse = GetMousePosition();
+            mousePosition = GetScreenToWorld2D(mouse, camera2D);
+
+
+            camera2D.zoom(camera2D.zoom() + GetMouseWheelMove() * 0.05f);
+            if (camera2D.zoom() > 3.0f) camera2D.zoom(3.0f);
+            else if (camera2D.zoom() < 0.1f) camera2D.zoom(0.1f);
+
+            if (freeMove) {
+                camera2D.target(mouse);
+            }
+
+            if (IsKeyPressed(KEY_F)) {
+                if (freeMove) {
+                    freeMove = false;
+                } else {
+                    freeMove = true;
+                }
+            }
+
 
             for (int i = 0; i < ROWS; i++) {
                 for (int j = 0; j < ROWS; j++) {
-                    if (CheckCollisionPointRec(mouse, grid.getGrid()[i][j])) {
+                    if (CheckCollisionPointRec(mousePosition, grid.getGrid()[i][j])) {
                         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
                             if (grid.getGrid()[i][j] != end && grid.getGrid()[i][j] != start) {
                                 grid.getGrid()[i][j].setColor(GRAY);
@@ -94,6 +125,8 @@ public class Main {
 
                 if (IsKeyPressed(KEY_R)) {
                     if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
+                        camera2D.zoom(1.0f);
+                        camera2D.target(new Jaylib.Vector2((screenWidth + (grid.getGrid().length * grid.getGrid()[0][0].x() * ROWS)) / 2, (screenWidth + (grid.getGrid().length * grid.getGrid()[0][0].y() * ROWS)) / 2));
                         grid.createGrid();
                         algorithm.getOpenSet().clear();
                         algorithm.getClosedSet().clear();
@@ -129,8 +162,10 @@ public class Main {
 
 
             BeginDrawing();
+            BeginMode2D(camera2D);
             ClearBackground(BLACK);
-            grid.drawGrid();
+            grid.drawGrid(camera2D.zoom());
+            EndMode2D();
             DrawText("Steps: " + algorithm.getSteps(), 5, screenWidth - 50, 20, BLACK);
             EndDrawing();
 

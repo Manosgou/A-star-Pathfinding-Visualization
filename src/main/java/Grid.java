@@ -36,10 +36,10 @@ public class Grid {
         return this.grid;
     }
 
-    public void drawGrid() {
+    public void drawGrid(float zoom) {
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < rows; y++) {
-                grid[x][y].drawCube();
+                grid[x][y].drawCube(zoom);
             }
         }
     }
