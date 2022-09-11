@@ -55,11 +55,7 @@ public class Main {
             }
 
             if (IsKeyPressed(KEY_F)) {
-                if (freeMove) {
-                    freeMove = false;
-                } else {
-                    freeMove = true;
-                }
+                freeMove = !freeMove;
             }
 
 
@@ -113,9 +109,7 @@ public class Main {
                                 System.out.println("INFO:Path not found");
                             }
                             final Animation animation = new Animation(grid.getGrid(), algorithm.getClosedSet(), algorithm.getOpenSet(), algorithm.getFinalPath(), animated, start, end);
-                            animationThread = new Thread(() -> {
-                                animation.animate();
-                            });
+                            animationThread = new Thread(animation::animate);
                             animationThread.start();
 
 

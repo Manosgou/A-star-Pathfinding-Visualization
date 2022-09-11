@@ -68,6 +68,8 @@ public class AStar {
                 if (this.openSet.get(i).getFScore() < this.openSet.get(lowestF).getFScore()) {
                     lowestF = i;
 
+                }else{
+                    break;
                 }
 
             }
