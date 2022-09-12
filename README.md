@@ -31,6 +31,8 @@ final boolean animated = true;
 * **"R"** to reset. ~~(Do not to press the R button when the animation runs,it will lead to an exception.)~~
 * **"G"** to place random obstacles on the grid.
 * **"F"** to enable and disable free camera movement in the 2d space.
+* **"Up arrow"** to increase animation delay.
+* **"Down arrow"** to decrease animation delay.
 * **"SPACEBAR"** to start the algorithm.
 
 # Screenshots & Videos
