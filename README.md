@@ -1,5 +1,5 @@
 # A*(star) Pathfinding Visualization 
-This project is a visual representation of the [A* (star)](https://en.wikipedia.org/wiki/A*_search_algorithm) pathfinding algorithm, built using Java and [RayLib]('https://www.raylib.com/index.html').
+This project is a visual representation of the [A* (star)](https://en.wikipedia.org/wiki/A*_search_algorithm) pathfinding algorithm, built using Java and [RayLib)](https://www.raylib.com/index.html).
 
 # What is A*(star)?
 A*(star) is one of the most successful search algorithms to find the shortest path between nodes or graphs. It is an informed search algorithm, as it uses information about path cost and also uses heuristics to find the solution.
