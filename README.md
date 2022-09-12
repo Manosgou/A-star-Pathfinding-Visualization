@@ -49,7 +49,12 @@ This app can be executed in the following list of operating systems:
 For macOS arm64 and any other arm based operating system, you will need to build your own JayLib binary.
 
 # Screenshots & Videos
-coming soon ...
+
+<img src="media/Image1.png"  width="500" height="500">
+<img src="media/Image2.png"  width="500" height="500">
+<img src="media/Gif.gif"  width="500" height="500">
+
+
 
 
 # Important note
