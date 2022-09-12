@@ -15,12 +15,16 @@ Inside `main.java` you will find the following three variables.
 // By changing its value you will also affect the number of columns because rows = columns.(DEFAULT = 20)
 final int ROWS = 20;
 
-//The allowDiagonal variable according to it's value(true or false) allows diagonal movement.
-// Default value is true.(DEFAULT =true)
+//The allowDiagonal variable according to it's value(true or false) allows diagonal movement.(DEFAULT = true)
 final boolean allowDiagonal =true;
 
-//The animated variable enables the animated visual representation of pathfinding.(DEFAULT =true)
+//The animated variable enables the animated visual representation of pathfinding.(DEFAULT = true)
 final boolean animated = true;
+
+//The animationDelay variable controls the delay of animated visual representation. 
+// You can also update this variable during app execution using up and down arrows (Check controls section). 
+// During execution the minimum and maximum value extends from number 1 to number 8. (DEFAULT = 1)
+int animationDelay = 1;
 ```
 
 # Controls
@@ -34,6 +38,15 @@ final boolean animated = true;
 * **"Up arrow"** to increase animation delay.
 * **"Down arrow"** to decrease animation delay.
 * **"SPACEBAR"** to start the algorithm.
+
+# Platforms
+This app can be executed in the following list of operating systems:
+* Windows x86_64
+* macOS x86_64
+* Linux x86_64
+* Linux arm (Raspberry Pi only)
+
+For macOS arm64 and any other arm based operating system, you will need to build your own JayLib binary.
 
 # Screenshots & Videos
 coming soon ...
