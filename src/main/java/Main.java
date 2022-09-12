@@ -42,6 +42,8 @@ public class Main {
 
         boolean freeMove = false;
 
+        long timeExcution = 0;
+
         while (!WindowShouldClose()) {
             mouse = GetMousePosition();
             mousePosition = GetScreenToWorld2D(mouse, camera2D);
@@ -104,11 +106,14 @@ public class Main {
                             System.out.println("ERROR:You need to add a Start point and an Endpoint in order for the algorithm to start.");
                         } else {
                             grid.updateNeighbours(allowDiagonal);
+                            long startTime = System.nanoTime();
                             if (algorithm.solveAStar(start, end)) {
                                 System.out.println("INFO:Path was found.Total steps: " + algorithm.getSteps());
                             } else {
                                 System.out.println("INFO:Path not found");
                             }
+                            long endTime = System.nanoTime();
+                            timeExcution =(endTime - startTime);
                             final Animation animation = new Animation(grid.getGrid(), algorithm.getClosedSet(), algorithm.getOpenSet(), algorithm.getFinalPath(), animated, animationDelay, start, end);
                             animationThread = new Thread(animation::animate);
                             animationThread.start();
@@ -175,7 +180,12 @@ public class Main {
             ClearBackground(BLACK);
             grid.drawGrid(camera2D.zoom());
             EndMode2D();
-            DrawText("Steps: " + animationDelay, 5, screenWidth - 50, 20, BLACK);
+            GuiPanel(new Jaylib.Rectangle(5, screenWidth - 110, 180, 100), "Info");
+            GuiLabel(new Jaylib.Rectangle(13, screenWidth - 80, 120, 24), "Steps: " + algorithm.getSteps());
+            if (animated) {
+                GuiLabel(new Jaylib.Rectangle(13, screenWidth - 60, 120, 24), "Animtation delay: " + animationDelay+" millis");
+            }
+            GuiLabel(new Jaylib.Rectangle(13, screenWidth - 40, 120, 24), "Time excution: " + timeExcution+" millis");
             EndDrawing();
 
         }

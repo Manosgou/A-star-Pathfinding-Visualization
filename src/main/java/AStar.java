@@ -1,3 +1,5 @@
+import com.raylib.Jaylib;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -64,7 +66,6 @@ public class AStar {
         start.setFScore(start.getGScore() + start.getHScore());
 
 
-        int lowestF = 0;
         while (!this.openSet.isEmpty()) {
             Cube current = this.openSet.stream().min(Comparator.comparing(Cube::getFScore)).orElseThrow(NoSuchElementException::new);
             if (current.equals(end)) {
@@ -93,8 +94,11 @@ public class AStar {
             }
 
         }
+        try {
+            Thread.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return false;
     }
-
-
 }
