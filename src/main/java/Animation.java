@@ -7,14 +7,16 @@ public class Animation {
     private final Cube[][] grid;
     private final ArrayList<Cube> closedSet, openSet, finalPath;
     private final boolean animated;
+    private int animationDelay;
     private Cube start, end;
 
-    public Animation(Cube[][] grid, ArrayList closedSet, ArrayList openSet, ArrayList finalPath, boolean animated, Cube start, Cube end) {
+    public Animation(Cube[][] grid, ArrayList closedSet, ArrayList openSet, ArrayList finalPath, boolean animated, int animationDelay,Cube start, Cube end) {
         this.grid = grid;
         this.closedSet = closedSet;
         this.openSet = openSet;
         this.finalPath = finalPath;
         this.animated = animated;
+        this.animationDelay =animationDelay;
         this.start = start;
         this.end = end;
     }
@@ -41,7 +43,7 @@ public class Animation {
                 }
                 if (animated) {
                     try {
-                        Thread.sleep(2);
+                        Thread.sleep(this.animationDelay);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

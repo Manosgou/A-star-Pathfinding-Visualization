@@ -66,7 +66,7 @@ public class AStar {
 
         int lowestF = 0;
         while (!this.openSet.isEmpty()) {
-            Cube current = this.openSet.stream().min(Comparator.comparing(Cube::getFScore)).orElseThrow(NoSuchElementException::new);;
+            Cube current = this.openSet.stream().min(Comparator.comparing(Cube::getFScore)).orElseThrow(NoSuchElementException::new);
             if (current.equals(end)) {
                 this.reconstructPath(current);
                 return true;

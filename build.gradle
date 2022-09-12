@@ -22,6 +22,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'uk.co.electronstudio.jaylib:jaylib:4.2.+'
     implementation 'org.apache.commons:commons-lang3:3.0'
+    implementation "io.github.spair:imgui-java-app:1.86.4"
 }
 
 application {

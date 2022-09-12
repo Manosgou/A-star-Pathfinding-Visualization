@@ -17,6 +17,7 @@ public class Main {
         final int ROWS = 20;
         final boolean allowDiagonal = true;
         final boolean animated = true;
+        int animationDelay = 1;
 
 
         final Grid grid = new Grid(ROWS, screenWidth);
@@ -108,7 +109,7 @@ public class Main {
                             } else {
                                 System.out.println("INFO:Path not found");
                             }
-                            final Animation animation = new Animation(grid.getGrid(), algorithm.getClosedSet(), algorithm.getOpenSet(), algorithm.getFinalPath(), animated, start, end);
+                            final Animation animation = new Animation(grid.getGrid(), algorithm.getClosedSet(), algorithm.getOpenSet(), algorithm.getFinalPath(), animated, animationDelay, start, end);
                             animationThread = new Thread(animation::animate);
                             animationThread.start();
 
@@ -116,7 +117,21 @@ public class Main {
                         }
                     }
                 }
+                if (IsKeyPressed(KEY_UP) && animated) {
+                    if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
+                        if (animationDelay < 8) {
+                            animationDelay++;
+                        }
+                    }
+                }
 
+                if (IsKeyPressed(KEY_DOWN) && animated) {
+                    if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
+                        if (animationDelay > 1) {
+                            animationDelay--;
+                        }
+                    }
+                }
                 if (IsKeyPressed(KEY_R)) {
                     if (animationThread == null || animationThread.getState().equals(Thread.State.TERMINATED)) {
                         camera2D.zoom(1.0f);
@@ -160,10 +175,11 @@ public class Main {
             ClearBackground(BLACK);
             grid.drawGrid(camera2D.zoom());
             EndMode2D();
-            DrawText("Steps: " + algorithm.getSteps(), 5, screenWidth - 50, 20, BLACK);
+            DrawText("Steps: " + animationDelay, 5, screenWidth - 50, 20, BLACK);
             EndDrawing();
 
         }
         Raylib.CloseWindow();
     }
+
 }
