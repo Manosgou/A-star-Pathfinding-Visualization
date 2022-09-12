@@ -1,12 +1,13 @@
 
 import java.util.ArrayList;
+
 import static com.raylib.Jaylib.BLUE;
 import static com.raylib.Raylib.*;
 
 
 public class Cube extends Rectangle {
     private boolean access;
-    private boolean isInfoVisible =false;
+    private boolean isInfoVisible = false;
     private Color color;
     private final ArrayList<Cube> neighbours;
     private double gScore, fScore, hScore;
@@ -23,7 +24,7 @@ public class Cube extends Rectangle {
         DrawRectangleRec(this, this.color);
         if (zoom >= 1.2f && this.isInfoVisible) {
             String fScore2String = String.valueOf(Math.round(this.fScore));
-            DrawText(fScore2String, (int) (this.width()/2+this.x())-MeasureText(fScore2String,2)/2, (int) (this.width()/2+this.y())-GetFontDefault().baseSize()/2, 1, BLUE);
+            DrawText(fScore2String, (int) (this.width() / 2 + this.x()) - MeasureText(fScore2String, 2) / 2, (int) (this.width() / 2 + this.y()) - GetFontDefault().baseSize() / 2, 1, BLUE);
 //            DrawText(String.valueOf(Math.round(this.hScore)), (int) (this.x() + this.width() - 18), (int) (this.y() + this.height() - 12), 2, RED);
         }
 
@@ -84,4 +85,5 @@ public class Cube extends Rectangle {
     public double getFScore() {
         return this.fScore;
     }
+
 }

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class AStar {
 
@@ -64,12 +66,7 @@ public class AStar {
 
         int lowestF = 0;
         while (!this.openSet.isEmpty()) {
-            for (int i = 0; i < this.openSet.size(); i++) {
-                if (this.openSet.get(i).getFScore() < this.openSet.get(lowestF).getFScore()) {
-                    lowestF = i;
-                }
-            }
-            Cube current = this.openSet.get(lowestF);
+            Cube current = this.openSet.stream().min(Comparator.comparing(Cube::getFScore)).orElseThrow(NoSuchElementException::new);;
             if (current.equals(end)) {
                 this.reconstructPath(current);
                 return true;
