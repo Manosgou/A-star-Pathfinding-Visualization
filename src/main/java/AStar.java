@@ -18,13 +18,13 @@ public class AStar {
 
     }
 
-    private double distance(Cube c1, Cube c2) {
-        return Math.sqrt((c1.x() - c2.x()) * (c1.x() - c2.x()) + (c1.y() - c2.y()) * (c1.y() - c2.y()));
+    private double euclieanDistance(Cube c1, Cube c2) {
+        return Math.sqrt(Math.pow((c1.x() - c2.x()) * (c1.x() - c2.x()),2.0f) + Math.pow((c1.y() - c2.y()) * (c1.y() - c2.y()),2.0f));
     }
 
     private double heuristic(Cube neighbour, Cube end) {
         if (this.allowDiagonal) {
-            return distance(neighbour, end);
+            return euclieanDistance(neighbour, end);
         } else {
             return Math.abs(neighbour.x() - end.x()) + Math.abs(neighbour.y() - end.y());
         }
@@ -67,11 +67,7 @@ public class AStar {
             for (int i = 0; i < this.openSet.size(); i++) {
                 if (this.openSet.get(i).getFScore() < this.openSet.get(lowestF).getFScore()) {
                     lowestF = i;
-
-                }else{
-                    break;
                 }
-
             }
             Cube current = this.openSet.get(lowestF);
             if (current.equals(end)) {
@@ -85,10 +81,10 @@ public class AStar {
             for (Cube neighbor : current.getNeighbours()) {
                 if (closedSet.contains(neighbor))
                     continue;
-                double tempG = neighbor.getGScore() + this.distance(current,neighbor);
-                if(!openSet.contains(neighbor))
+                double tempG = neighbor.getGScore() + this.euclieanDistance(current, neighbor);
+                if (!openSet.contains(neighbor))
                     openSet.add(neighbor);
-                else if(tempG>=neighbor.getGScore())
+                else if (tempG >= neighbor.getGScore())
                     continue;
 
 

@@ -24,12 +24,13 @@ final boolean animated = true;
 ```
 
 # Controls
-* **"Left click"** to create obstacles.
-* **"Right click"** to delete obstacles.
+* **"Left click" (LMB)** to create obstacles.
+* **"Right click" (RMB)** to delete obstacles.
 * **"S"** to add the start point.
 * **"E"** to add the end point.
 * **"R"** to reset. ~~(Do not to press the R button when the animation runs,it will lead to an exception.)~~
 * **"G"** to place random obstacles on the grid.
+* **"F"** to enable and disable free camera movement in the 2d space.
 * **"SPACEBAR"** to start the algorithm.
 
 # Screenshots & Videos

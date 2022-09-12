@@ -14,7 +14,7 @@ public class Main {
         InitWindow(screenWidth, screenWidth, "A* Pathfinding");
         SetTargetFPS(60);
 
-        final int ROWS = 50;
+        final int ROWS = 20;
         final boolean allowDiagonal = true;
         final boolean animated = true;
 

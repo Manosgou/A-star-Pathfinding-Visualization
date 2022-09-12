@@ -1,14 +1,12 @@
-import com.raylib.Raylib.*;
 
 import java.util.ArrayList;
+import static com.raylib.Jaylib.BLUE;
+import static com.raylib.Raylib.*;
 
-import static com.raylib.Jaylib.BLACK;
-import static com.raylib.Jaylib.RED;
-import static com.raylib.Raylib.DrawRectangleRec;
-import static com.raylib.Raylib.DrawText;
 
 public class Cube extends Rectangle {
     private boolean access;
+    private boolean isInfoVisible =false;
     private Color color;
     private final ArrayList<Cube> neighbours;
     private double gScore, fScore, hScore;
@@ -23,15 +21,18 @@ public class Cube extends Rectangle {
     public void drawCube(float zoom) {
 
         DrawRectangleRec(this, this.color);
-        if (zoom >= 1.2f) {
-            DrawText(String.valueOf(Math.round(this.gScore)), (int) (this.x() + 2), (int) (this.y() + 2), 2, RED);
-            DrawText(String.valueOf(Math.round(this.fScore)), (int) (this.x() + 2), (int) (this.y() + this.height() - 12), 2, RED);
-            DrawText(String.valueOf(Math.round(this.hScore)), (int) (this.x() + this.width() - 18), (int) (this.y() + this.height() - 12), 2, RED);
+        if (zoom >= 1.2f && this.isInfoVisible) {
+            String fScore2String = String.valueOf(Math.round(this.fScore));
+            DrawText(fScore2String, (int) (this.width()/2+this.x())-MeasureText(fScore2String,2)/2, (int) (this.width()/2+this.y())-GetFontDefault().baseSize()/2, 1, BLUE);
+//            DrawText(String.valueOf(Math.round(this.hScore)), (int) (this.x() + this.width() - 18), (int) (this.y() + this.height() - 12), 2, RED);
         }
 
 
     }
 
+    public void setInfoVisible(boolean infoVisible) {
+        isInfoVisible = infoVisible;
+    }
 
     public boolean isAccessible() {
         return this.access;
